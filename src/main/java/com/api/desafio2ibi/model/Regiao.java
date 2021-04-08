@@ -18,6 +18,12 @@ public class Regiao {
 	@OneToMany
 	private List<SubRegiao> subRegioao;
 	
+	public List<SubRegiao> getSubRegioao() {
+		return subRegioao;
+	}
+	public void setSubRegioao(List<SubRegiao> subRegioao) {
+		this.subRegioao = subRegioao;
+	}
 	private String nome;
 	public String getNome() {
 		return nome;
