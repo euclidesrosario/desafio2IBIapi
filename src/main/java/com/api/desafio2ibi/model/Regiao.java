@@ -15,6 +15,9 @@ public class Regiao {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	
+	/* ID -> uma regiao possui arias sub regioes/*/
+
 	@OneToMany
 	private List<SubRegiao> subRegioao;
 	

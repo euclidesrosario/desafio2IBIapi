@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 
@@ -15,6 +16,10 @@ public class Pais {
 	
 	private String nome;
 	private String capital;
+	
+	@ManyToOne
+	private SubRegiao subRegiao;
+	
 	public String getNome() {
 		return nome;
 	}
