@@ -12,6 +12,16 @@ public class Regiao {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String nome;
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public long getId() {
+		return id;
+	}
+	
 	
 	
 }
