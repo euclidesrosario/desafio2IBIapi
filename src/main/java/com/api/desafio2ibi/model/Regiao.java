@@ -14,6 +14,7 @@ public class Regiao {
 	/* ID -> dentificador – gerado automaticamente/*/
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
 	@OneToMany
 	private List<SubRegiao> subRegioao;
 	
