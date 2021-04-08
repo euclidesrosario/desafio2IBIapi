@@ -1,9 +1,12 @@
 package com.api.desafio2ibi.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class SubRegiao {
@@ -12,6 +15,10 @@ public class SubRegiao {
 	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO) 
 	private long id;
+	
+	@ManyToMany
+	private List<Pais> pais;
+	
 	private String nome;
 	public String getNome() {
 		return nome;
@@ -22,7 +29,12 @@ public class SubRegiao {
 	public long getId() {
 		return id;
 	}
-	
+	public List<Pais> getPais() {
+		return pais;
+	}
+	public void setPais(List<Pais> pais) {
+		this.pais = pais;
+	}
 	
 	
 }
