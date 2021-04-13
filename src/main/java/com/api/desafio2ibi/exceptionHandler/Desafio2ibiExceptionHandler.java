@@ -59,7 +59,7 @@ public class Desafio2ibiExceptionHandler extends ResponseEntityExceptionHandler 
 	@ExceptionHandler({EmptyResultDataAccessException.class  })
 	public ResponseEntity<Object> handleEmptyResultDataAccessException(RuntimeException ex, WebRequest request) {
 		
-		String mensagemUsuario = messageSource.getMessage("recurso-nao-encontrado",null, LocaleContextHolder.getLocale());
+		String mensagemUsuario = messageSource.getMessage("recurso.nao-encontrado",null, LocaleContextHolder.getLocale());
 		String mensagemTecnica = ex.toString();
 		List<Erro>	erros = Arrays.asList(new Erro(mensagemUsuario,mensagemTecnica));
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
