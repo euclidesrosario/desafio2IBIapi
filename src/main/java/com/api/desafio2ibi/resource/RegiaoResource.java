@@ -48,6 +48,7 @@ public class RegiaoResource {
 		Regiao regiaoSalva = regiaoRepository.save(regiao);
 		URI uri= ServletUriComponentsBuilder.fromCurrentRequestUri()
 		.path("/{id}").buildAndExpand(regiaoSalva.getId()).toUri();
+		
 		response.setHeader("location", uri.toASCIIString());
 		
 		return ResponseEntity.created(uri).body(regiaoSalva);
@@ -55,16 +56,13 @@ public class RegiaoResource {
 	
 	
 	
-	@PutMapping()
+	@PutMapping("/{id}")
 	public ResponseEntity<Regiao> atualizar(@PathVariable("id") long id, @Valid @RequestBody Regiao regiao){
 		Regiao RegiaoSalva = regiaoService.atualizar(id, regiao);
 		return ResponseEntity.ok(RegiaoSalva);
 	}
 	
-	
-	
-	
-	
+
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover( @PathVariable Long id) {
