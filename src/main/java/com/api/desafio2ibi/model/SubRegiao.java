@@ -2,12 +2,14 @@ package com.api.desafio2ibi.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class SubRegiao {
@@ -17,11 +19,13 @@ public class SubRegiao {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO) 
 	private long id;
 	
-	/* ID ->  uma sub regiao tem uma lista de paises/*/
+
 	@ManyToMany
 	private List<Pais> pais;
+	@Column(unique=true)
+	private String nome;
 	
-	/* ID ->  uma ou varias sub regioes pertencem a uma regiao/*/
+	@NotNull
 	@ManyToOne
 	private Regiao regiao;
 	
@@ -32,7 +36,7 @@ public class SubRegiao {
 	public void setRegiao(Regiao regiao) {
 		this.regiao = regiao;
 	}
-	private String nome;
+	
 	public String getNome() {
 		return nome;
 	}
