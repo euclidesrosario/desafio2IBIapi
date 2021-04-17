@@ -21,7 +21,8 @@
 		anteriormente criados; Deve ser possível modificar os dados de um país
 		anteriormente criado; Deve ser possível eliminar um país anteriormente
 		criado; Deve ser possível ordenar a lista dos países por qualquer uma
-		das suas propriedades.</description>
+		das suas propriedades
+		.</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
