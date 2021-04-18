@@ -25,8 +25,12 @@ import com.api.desafio2ibi.model.SubRegiao;
 import com.api.desafio2ibi.repository.SubRegiaoRepository;
 import com.api.desafio2ibi.services.SubRegiaoService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/subregioes")
+@Api(value="Recurso sub regioes")
 public class SubRegiaoResource {
 	
 	
@@ -37,11 +41,15 @@ public class SubRegiaoResource {
 	
 	
 	@GetMapping
+	@ApiOperation(value="retorna uma lista de sub-regioes")
+
 	public List<SubRegiao> listar(){
 		return (List<SubRegiao>) subRegiaoRepository.findAll();	
 	}
 	
 	@GetMapping("/{id}")
+	@ApiOperation(value="retorna uma sub-regioes especifica")
+
 	public ResponseEntity<SubRegiao> pesuisarPorId (@PathVariable("id") long id){
 		SubRegiao subRegiao = subRegiaoRepository.findById(id);
 		return subRegiao !=null? ResponseEntity.ok(subRegiao) : ResponseEntity.notFound().build();
@@ -49,6 +57,8 @@ public class SubRegiaoResource {
 	}  
 	    
 	@PostMapping
+	@ApiOperation(value="salva uma sub-regiao")
+
 	public ResponseEntity<SubRegiao> registar(@Valid @RequestBody SubRegiao subRegiao, HttpServletResponse response) throws Exception{
 		SubRegiao SubregiaoExistente = subRegiaoRepository.findByNome(subRegiao.getNome());
 		
@@ -65,6 +75,8 @@ public class SubRegiaoResource {
 	
 	
 	@DeleteMapping("/{id}")
+	@ApiOperation(value="apaga sub-regiao")
+
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover (@PathVariable("id") Long id){
 		SubRegiao subRegiao = subRegiaoService.pesquisarPeloId(id);
@@ -72,6 +84,8 @@ public class SubRegiaoResource {
 		
 	}
 	@PutMapping("/{id}")
+	@ApiOperation(value="atualiza os dados de uma lista de sub-regiao")
+
 	public ResponseEntity<SubRegiao> actualizar(@PathVariable("id")Long id,@Valid @RequestBody SubRegiao subRegiao){
 		SubRegiao subRegiaoSalva =subRegiaoService.atualizar(id, subRegiao);
 		return ResponseEntity.ok(subRegiaoSalva);
