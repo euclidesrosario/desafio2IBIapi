@@ -75,7 +75,7 @@ public class SubRegiaoResource {
 	
 	
 	@DeleteMapping("/{id}")
-	@ApiOperation(value="apaga sub-regiao")
+	@ApiOperation(value="apaga uma sub-regiao atraves do ID")
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover (@PathVariable("id") Long id){
@@ -84,7 +84,7 @@ public class SubRegiaoResource {
 		
 	}
 	@PutMapping("/{id}")
-	@ApiOperation(value="atualiza os dados de uma lista de sub-regiao")
+	@ApiOperation(value="atualiza os dados de uma de sub-regiao, atraves do ID")
 
 	public ResponseEntity<SubRegiao> actualizar(@PathVariable("id")Long id,@Valid @RequestBody SubRegiao subRegiao){
 		SubRegiao subRegiaoSalva =subRegiaoService.atualizar(id, subRegiao);
