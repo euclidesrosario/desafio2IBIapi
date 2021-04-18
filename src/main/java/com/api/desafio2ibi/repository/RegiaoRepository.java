@@ -8,4 +8,6 @@ public interface RegiaoRepository extends JpaRepository<Regiao, Long> {
 
 	Regiao findById(long id);
 
+	Regiao findByNome(String nome);
+
 }

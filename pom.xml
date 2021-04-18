@@ -13,16 +13,19 @@
 	<artifactId>desafio2ibi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>desafio2ibi</name>
-	<description>Deve ser desenvolvida uma API RESTful que nos permite
+	<description>
+		Deve ser desenvolvida uma API RESTful que nos permite
 		gerenciar as informações das propriedades dos países (identificador –
-		gerado automaticamente, nome, capital, região, sub-região, área). Deve
+		gerado automaticamente, nome, capital, região, sub-região, área).
+		Deve
 		ser possível criar um novo país a partir da API criada com todas as
 		suas propriedades; Deve ser possível listar todos os países
 		anteriormente criados; Deve ser possível modificar os dados de um país
 		anteriormente criado; Deve ser possível eliminar um país anteriormente
 		criado; Deve ser possível ordenar a lista dos países por qualquer uma
 		das suas propriedades
-		.</description>
+		.
+	</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -31,14 +34,26 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+
+		<dependency>
+       <groupId>io.springfox</groupId>
+       <artifactId>springfox-swagger2</artifactId>
+       <version>2.6.1</version>
+   </dependency>
+ 
+   <dependency>
+       <groupId>io.springfox</groupId>
+       <artifactId>springfox-swagger-ui</artifactId>
+       <version>2.6.1</version>
+   </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+
 		<dependency>
-    		<groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-validation</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -52,10 +67,10 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-        <groupId>mysql</groupId>
-        <artifactId>mysql-connector-java</artifactId>
-        <scope>runtime</scope>
-    </dependency> 
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

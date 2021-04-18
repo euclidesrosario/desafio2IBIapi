@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,6 +50,11 @@ public class SubRegiaoResource {
 	    
 	@PostMapping
 	public ResponseEntity<SubRegiao> registar(@Valid @RequestBody SubRegiao subRegiao, HttpServletResponse response) throws Exception{
+		SubRegiao SubregiaoExistente = subRegiaoRepository.findByNome(subRegiao.getNome());
+		
+		if(SubregiaoExistente !=null) {
+			throw new IncorrectResultSizeDataAccessException(0);	
+		}
 		
 		 SubRegiao SubregiaoSalva =subRegiaoService.salvar(subRegiao);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(SubregiaoSalva.getId()).toUri();
@@ -56,6 +62,8 @@ public class SubRegiaoResource {
 		return ResponseEntity.created(uri).body(SubregiaoSalva);
 		
 	}
+	
+	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover (@PathVariable("id") Long id){

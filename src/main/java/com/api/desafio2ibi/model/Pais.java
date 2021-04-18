@@ -22,6 +22,7 @@ public class Pais {
 	@NotNull
 	private long area;
 	
+	@NotNull
 	@ManyToOne
 	private SubRegiao subRegiao;
 	
@@ -39,6 +40,21 @@ public class Pais {
 	}
 	public long getId() {
 		return id;
+	}
+	public long getArea() {
+		return area;
+	}
+	public void setArea(long area) {
+		this.area = area;
+	}
+	public SubRegiao getSubRegiao() {
+		return subRegiao;
+	}
+	public void setSubRegiao(SubRegiao subRegiao) {
+		this.subRegiao = subRegiao;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 }

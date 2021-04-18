@@ -9,6 +9,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,10 +58,21 @@ public class Desafio2ibiExceptionHandler extends ResponseEntityExceptionHandler 
 	return erros;
 	}
 	
-	@ExceptionHandler({EmptyResultDataAccessException.class  })
+	@ExceptionHandler({EmptyResultDataAccessException.class})
 	public ResponseEntity<Object> handleEmptyResultDataAccessException(RuntimeException ex, WebRequest request) {
 		
 		String mensagemUsuario = messageSource.getMessage("recurso.nao-encontrado",null, LocaleContextHolder.getLocale());
+		String mensagemTecnica = ex.toString();
+		List<Erro>	erros = Arrays.asList(new Erro(mensagemUsuario,mensagemTecnica));
+		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+
+		
+	}
+	
+	@ExceptionHandler({NullPointerException.class})
+	public ResponseEntity<Object> handleNullPointerException(RuntimeException ex, WebRequest request) {
+		
+		String mensagemUsuario = messageSource.getMessage("recurso.nullo",null, LocaleContextHolder.getLocale());
 		String mensagemTecnica = ex.toString();
 		List<Erro>	erros = Arrays.asList(new Erro(mensagemUsuario,mensagemTecnica));
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
@@ -78,9 +90,17 @@ public class Desafio2ibiExceptionHandler extends ResponseEntityExceptionHandler 
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 
 	}
+	
+	
+	@ExceptionHandler({IncorrectResultSizeDataAccessException.class})
+	public ResponseEntity<Object> handleIncorrectResultSizeDataAccessException(IncorrectResultSizeDataAccessException ex, WebRequest request ){
+		
+		String mensagemUsuario = messageSource.getMessage("recurso-existente",null, LocaleContextHolder.getLocale());
+		String mensagemTecnica = ex.toString();
+		List<Erro>	erros = Arrays.asList(new Erro(mensagemUsuario,mensagemTecnica));
+		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 
-	
-	
+	}
 	
 	// classe para mensagens de erro
 	public static class Erro {
@@ -98,8 +118,6 @@ public class Desafio2ibiExceptionHandler extends ResponseEntityExceptionHandler 
 		public String getMensagemTecnica() {
 			return mensagemTecnica;
 		}
-		
-		
 		
 	}
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ public class RegiaoResource {
 	
 	@GetMapping
 	public List<Regiao> listar(){
-		return (List<Regiao>) regiaoRepository.findAll();	
+		return (List<Regiao>) regiaoRepository.findAll();    	
 	}
 	
 	@GetMapping("/{id}")
@@ -45,6 +46,12 @@ public class RegiaoResource {
 	
 	@PostMapping
 	public ResponseEntity<Regiao> criar (@Valid @RequestBody Regiao regiao, 	HttpServletResponse response ) {
+		
+		Regiao RegiaoExistente = regiaoRepository.findByNome(regiao.getNome());
+		
+		if(RegiaoExistente !=null) {
+			throw new IncorrectResultSizeDataAccessException(1);
+		}
 		Regiao regiaoSalva = regiaoRepository.save(regiao);
 		URI uri= ServletUriComponentsBuilder.fromCurrentRequestUri()
 		.path("/{id}").buildAndExpand(regiaoSalva.getId()).toUri();
@@ -55,12 +62,13 @@ public class RegiaoResource {
 	}
 	
 	
-	
 	@PutMapping("/{id}")
 	public ResponseEntity<Regiao> atualizar(@PathVariable("id") long id, @Valid @RequestBody Regiao regiao){
 		Regiao RegiaoSalva = regiaoService.atualizar(id, regiao);
 		return ResponseEntity.ok(RegiaoSalva);
 	}
+	
+	
 	
 
 	@DeleteMapping("/{id}")
